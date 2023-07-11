@@ -7,14 +7,20 @@ import romilp.foody.data.database.entities.FavoritesEntity
 import romilp.foody.data.database.entities.FoodJokeEntity
 import romilp.foody.data.database.entities.RecipesEntity
 
+/**
+ * Room Database class for the recipes database.
+ */
 @Database(
     entities = [RecipesEntity::class, FavoritesEntity::class, FoodJokeEntity::class],
     version = 1,
     exportSchema = false
 )
-
 @TypeConverters(RecipesTypeConverter::class)
 abstract class RecipesDatabase : RoomDatabase() {
 
+    /**
+     * Get the DAO interface for interacting with the recipes database.
+     * @return The RecipesDAO instance.
+     */
     abstract fun recipesDao(): RecipesDAO
 }

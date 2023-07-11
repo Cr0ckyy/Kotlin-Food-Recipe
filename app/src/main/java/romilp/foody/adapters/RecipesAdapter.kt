@@ -18,6 +18,7 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
 
         companion object {
             fun from(parent: ViewGroup): MyViewHolder {
+                // Inflate the layout for each item view
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecipesRowLayoutBinding.inflate(layoutInflater, parent, false)
                 return MyViewHolder(binding)
@@ -25,27 +26,31 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
         }
 
         fun bind(result: Result) {
+            // Bind data to the views of the item view
             binding.result = result
             binding.executePendingBindings()
         }
 
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        // Create a ViewHolder instance for each item view
         return MyViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        // Bind data to the ViewHolder at the specified position
         val currentRecipe = recipes[position]
         holder.bind(currentRecipe)
     }
 
     override fun getItemCount(): Int {
+        // Return the total number of recipes
         return recipes.size
     }
 
     fun setData(newData: FoodRecipe) {
+        // Calculate the diff between the old and new recipe lists
         val recipesDiffUtil =
             RecipesDiffUtil(recipes, newData.results)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)

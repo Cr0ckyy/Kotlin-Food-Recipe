@@ -13,6 +13,12 @@ class FoodJokeBinding {
 
     companion object {
 
+        /**
+         * Custom BindingAdapter to set the visibility of card view and progress bar based on the API response and database.
+         * @param view The view to set visibility for.
+         * @param apiResponse The API response result.
+         * @param database The list of food joke entities from the database.
+         */
         @BindingAdapter("readApiResponse3", "readDatabase3", requireAll = false)
         @JvmStatic
         fun setCardAndProgressVisibility(
@@ -59,6 +65,12 @@ class FoodJokeBinding {
             }
         }
 
+        /**
+         * Custom BindingAdapter to set the visibility of error views based on the API response and database.
+         * @param view The view to set visibility for.
+         * @param apiResponse The API response result.
+         * @param database The list of food joke entities from the database.
+         */
         @BindingAdapter("readApiResponse4", "readDatabase4", requireAll = true)
         @JvmStatic
         fun setErrorViewsVisibility(
@@ -82,5 +94,4 @@ class FoodJokeBinding {
         }
 
     }
-
 }

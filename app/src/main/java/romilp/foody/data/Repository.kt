@@ -8,6 +8,6 @@ class Repository @Inject constructor(
     remoteDataSource: RemoteDataSource,
     localDataSource: LocalDataSource
 ) {
-    val remote = remoteDataSource
-    val local = localDataSource
+    val remote = remoteDataSource // Remote data source for accessing remote API
+    val local = localDataSource // Local data source for accessing local database
 }

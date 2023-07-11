@@ -8,33 +8,33 @@ import kotlinx.parcelize.RawValue
 @Parcelize
 data class Result(
     @SerializedName("aggregateLikes")
-    val aggregateLikes: Int,
+    val aggregateLikes: Int, // The number of aggregate likes for the recipe
     @SerializedName("cheap")
-    val cheap: Boolean,
+    val cheap: Boolean, // Indicates if the recipe is cheap
     @SerializedName("dairyFree")
-    val dairyFree: Boolean,
+    val dairyFree: Boolean, // Indicates if the recipe is dairy-free
     @SerializedName("extendedIngredients")
-    val extendedIngredients: @RawValue List<ExtendedIngredient>,
+    val extendedIngredients: @RawValue List<ExtendedIngredient>, // The list of extended ingredients for the recipe
     @SerializedName("glutenFree")
-    val glutenFree: Boolean,
+    val glutenFree: Boolean, // Indicates if the recipe is gluten-free
     @SerializedName("id")
-    val recipeId: Int,
+    val recipeId: Int, // The ID of the recipe
     @SerializedName("image")
-    val image: String,
+    val image: String, // The URL of the recipe image
     @SerializedName("readyInMinutes")
-    val readyInMinutes: Int,
+    val readyInMinutes: Int, // The cooking time in minutes for the recipe
     @SerializedName("sourceName")
-    val sourceName: String?,
+    val sourceName: String?, // The name of the recipe source
     @SerializedName("sourceUrl")
-    val sourceUrl: String,
+    val sourceUrl: String, // The URL of the recipe source
     @SerializedName("summary")
-    val summary: String,
+    val summary: String, // The summary or description of the recipe
     @SerializedName("title")
-    val title: String,
+    val title: String, // The title of the recipe
     @SerializedName("vegan")
-    val vegan: Boolean,
+    val vegan: Boolean, // Indicates if the recipe is vegan
     @SerializedName("vegetarian")
-    val vegetarian: Boolean,
+    val vegetarian: Boolean, // Indicates if the recipe is vegetarian
     @SerializedName("veryHealthy")
-    val veryHealthy: Boolean,
+    val veryHealthy: Boolean, // Indicates if the recipe is very healthy
 ) : Parcelable

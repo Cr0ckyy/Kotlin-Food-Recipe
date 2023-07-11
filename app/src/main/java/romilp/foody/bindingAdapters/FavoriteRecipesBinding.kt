@@ -11,6 +11,12 @@ import romilp.foody.data.database.entities.FavoritesEntity
 class FavoriteRecipesBinding {
     companion object {
 
+        /**
+         * Custom BindingAdapter to set visibility of a view based on the data.
+         * @param view The view to set visibility for.
+         * @param favoritesEntity The list of favorite entities.
+         * @param mAdapter The adapter to update the data for.
+         */
         @BindingAdapter("setVisibility", "setData", requireAll = false)
         @JvmStatic
         fun setVisibility(
@@ -30,5 +36,4 @@ class FavoriteRecipesBinding {
             }
         }
     }
-
 }

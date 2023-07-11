@@ -21,10 +21,12 @@ class FavoriteRecipesAdapter(
 ) :
     RecyclerView.Adapter<FavoriteRecipesAdapter.MyViewHolder>(), ActionMode.Callback {
 
+    // Flag to track if multi-selection mode is active
     private var multiSelection = false
     private lateinit var mActionMode: ActionMode
     private lateinit var rootView: View
 
+    // Selected recipes during multi-selection
     private var selectedRecipes = arrayListOf<FavoritesEntity>()
     private var myViewHolders = arrayListOf<MyViewHolder>()
     private var favoriteRecipes = emptyList<FavoritesEntity>()
@@ -33,6 +35,7 @@ class FavoriteRecipesAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(favoritesEntity: FavoritesEntity) {
+            // Bind the data to the layout
             binding.favoritesEntity = favoritesEntity
             binding.executePendingBindings()
         }
@@ -44,10 +47,10 @@ class FavoriteRecipesAdapter(
                 return MyViewHolder(binding)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        // Create and return a ViewHolder for each item in the list
         return MyViewHolder.from(parent)
     }
 
@@ -63,7 +66,6 @@ class FavoriteRecipesAdapter(
         /**
          * Single Click Listener
          * */
-
         holder.binding.favoriteRecipesRowLayout.setOnClickListener {
             if (multiSelection) {
                 applySelection(holder, currentRecipe)
@@ -93,6 +95,7 @@ class FavoriteRecipesAdapter(
     }
 
     override fun getItemCount(): Int {
+        // Return the total number of items in the list
         return favoriteRecipes.size
     }
 
@@ -136,6 +139,7 @@ class FavoriteRecipesAdapter(
     }
 
     override fun onCreateActionMode(actionMode: ActionMode?, menu: Menu?): Boolean {
+        // Inflate the menu for the contextual action mode
         actionMode?.menuInflater?.inflate(R.menu.favorites_contextual_menu, menu)
         mActionMode = actionMode!!
         applyStatusBarColor(R.color.contextualStatusBarColor)
@@ -175,6 +179,7 @@ class FavoriteRecipesAdapter(
     }
 
     fun setData(newFavoriteRecipes: List<FavoritesEntity>) {
+        // Update the dataset and dispatch the diff result to the adapter
         val favoriteRecipesDiffUtil =
             RecipesDiffUtil(favoriteRecipes, newFavoriteRecipes)
         val diffUtilResult = DiffUtil.calculateDiff(favoriteRecipesDiffUtil)

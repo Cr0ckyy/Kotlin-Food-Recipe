@@ -12,10 +12,12 @@ class PagerAdapter(
 ) : FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int {
+        // Return the total number of fragments
         return fragments.size
     }
 
     override fun createFragment(position: Int): Fragment {
+        // Create a new fragment instance and pass the resultBundle as arguments
         fragments[position].arguments = resultBundle
         return fragments[position]
     }

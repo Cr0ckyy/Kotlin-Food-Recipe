@@ -23,6 +23,7 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class DataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) {
 
+    // Define preference keys for accessing DataStore
     private object PreferenceKeys {
         val selectedMealType = stringPreferencesKey(PREFERENCES_MEAL_TYPE)
         val selectedMealTypeId = intPreferencesKey(PREFERENCES_MEAL_TYPE_ID)
@@ -31,10 +32,18 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         val backOnline = booleanPreferencesKey(PREFERENCES_BACK_ONLINE)
     }
 
+    // Access DataStore using preferencesDataStore delegate
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
         name = PREFERENCES_NAME
     )
 
+    /**
+     * Save the selected meal type and diet type to DataStore.
+     * @param mealType The selected meal type.
+     * @param mealTypeId The ID of the selected meal type.
+     * @param dietType The selected diet type.
+     * @param dietTypeId The ID of the selected diet type.
+     */
     suspend fun saveMealAndDietType(
         mealType: String,
         mealTypeId: Int,
@@ -46,16 +55,22 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             preferences[PreferenceKeys.selectedMealTypeId] = mealTypeId
             preferences[PreferenceKeys.selectedDietType] = dietType
             preferences[PreferenceKeys.selectedDietTypeId] = dietTypeId
-
         }
     }
 
+    /**
+     * Save the back online status to DataStore.
+     * @param backOnline The back online status.
+     */
     suspend fun saveBackOnline(backOnline: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[PreferenceKeys.backOnline] = backOnline
         }
     }
 
+    /**
+     * Read the selected meal type and diet type from DataStore.
+     */
     val readMealAndDietType: Flow<MealAndDietType> = context.dataStore.data.catch { exception ->
         if (exception is IOException) {
             emit(emptyPreferences())
@@ -75,7 +90,9 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         )
     }
 
-
+    /**
+     * Read the back online status from DataStore.
+     */
     val readBackOnline: Flow<Boolean> = context.dataStore.data
         .catch { exception ->
             if (exception is IOException) {
@@ -90,6 +107,13 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
 }
 
+/**
+ * Data class representing the selected meal type and diet type.
+ * @param selectedMealType The selected meal type.
+ * @param selectedMealTypeId The ID of the selected meal type.
+ * @param selectedDietType The selected diet type.
+ * @param selectedDietTypeId The ID of the selected diet type.
+ */
 data class MealAndDietType(
     val selectedMealType: String,
     val selectedMealTypeId: Int,

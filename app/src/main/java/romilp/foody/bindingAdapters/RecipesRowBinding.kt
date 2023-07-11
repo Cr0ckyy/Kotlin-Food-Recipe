@@ -19,10 +19,14 @@ class RecipesRowBinding {
 
     companion object {
 
+        /**
+         * Custom BindingAdapter to handle recipe item click listener.
+         * @param recipeRowLayout The recipe row layout view.
+         * @param result The recipe result data.
+         */
         @BindingAdapter("onRecipeClickListener")
         @JvmStatic
         fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: Result) {
-
             recipeRowLayout.setOnClickListener {
                 Log.d("onRecipeClickListener", result.title)
                 try {
@@ -35,6 +39,11 @@ class RecipesRowBinding {
             }
         }
 
+        /**
+         * Custom BindingAdapter to load images from a URL using Coil library.
+         * @param imageView The ImageView to load the image into.
+         * @param imageUrl The URL of the image to load.
+         */
         @BindingAdapter("loadImagesFromUrl")
         @JvmStatic
         fun loadImagesFromUrl(imageView: ImageView, imageUrl: String) {
@@ -44,6 +53,11 @@ class RecipesRowBinding {
             }
         }
 
+        /**
+         * Custom BindingAdapter to apply vegan color to views based on the vegan flag.
+         * @param view The view to apply the vegan color to.
+         * @param vegan The boolean flag indicating whether the recipe is vegan.
+         */
         @BindingAdapter("applyVeganColor")
         @JvmStatic
         fun applyVeganColor(view: View, vegan: Boolean) {
@@ -69,6 +83,11 @@ class RecipesRowBinding {
             }
         }
 
+        /**
+         * Custom BindingAdapter to parse HTML content and set it to a TextView.
+         * @param textView The TextView to set the parsed HTML content to.
+         * @param description The HTML content to parse and set.
+         */
         @BindingAdapter("parseHtml")
         @JvmStatic
         fun parseHtml(textView: TextView, description: String?) {

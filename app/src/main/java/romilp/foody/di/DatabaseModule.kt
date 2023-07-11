@@ -15,12 +15,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
+    // Provides the singleton instance of the RecipesDatabase
     @Singleton
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context
     ) = Room.databaseBuilder(context, RecipesDatabase::class.java, DATABASE_NAME).build()
 
+    // Provides the DAO (Data Access Object) for interacting with the RecipesDatabase
     @Singleton
     @Provides
     fun provideDao(database: RecipesDatabase) = database.recipesDao()
